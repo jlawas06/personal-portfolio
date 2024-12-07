@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+.skill-progress {
+  transition: width 1s ease-out;
+}
+
+/* Optional hover effect */
+.skill-container:hover .skill-progress {
+  filter: brightness(1.1);
+}

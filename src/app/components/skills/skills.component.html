@@ -1,0 +1,61 @@
+<section 
+  id="skills" 
+  class="py-20 px-4" 
+  [class]="(themeService.isDarkMode$ | async) ? 'bg-gray-800/50' : 'bg-gray-50'"
+  appIntersectionObserver
+  (visibilityChange)="onIntersection($event)"
+>
+  <div class="max-w-6xl mx-auto">
+    <!-- Section Title -->
+    <h2 
+      [class]="(themeService.currentTheme$ | async)?.accent" 
+      class="text-3xl font-bold mb-12 text-center"
+    >
+      Skills & Technologies
+    </h2>
+
+    <!-- Skills Grid -->
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Skill Category Card -->
+      <div 
+        *ngFor="let category of skills" 
+        [class]="(themeService.currentTheme$ | async)?.card"
+        class="p-6 rounded-lg shadow-lg"
+      >
+        <!-- Category Title -->
+        <h3 
+          [class]="(themeService.currentTheme$ | async)?.accent" 
+          class="text-xl font-semibold mb-6"
+        >
+          {{category.category}}
+        </h3>
+
+        <!-- Skills List -->
+        <div class="space-y-4">
+          <div *ngFor="let skill of category.items" class="space-y-2">
+            <!-- Skill Name and Level -->
+            <div class="flex justify-between">
+              <span [class]="(themeService.currentTheme$ | async)?.textSecondary">
+                {{skill.name}}
+              </span>
+              <span 
+                [class]="(themeService.currentTheme$ | async)?.textMuted"
+                class="text-sm"
+              >
+                {{skill.level}}%
+              </span>
+            </div>
+
+            <!-- Skill Progress Bar -->
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                class="h-full rounded-full transition-all duration-1000 bg-cyan-600"
+                [style.width.%]="isVisible ? skill.level : 0"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
