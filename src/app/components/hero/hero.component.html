@@ -1,4 +1,7 @@
-<section class="min-h-screen flex items-center justify-center px-4 pt-16" id="about">
+<section
+  class="min-h-screen flex items-center justify-center px-4 pt-16"
+  id="about"
+>
   <div class="max-w-4xl text-center">
     <h1
       class="text-4xl sm:text-5xl font-bold mb-6"
@@ -6,24 +9,24 @@
     >
       Hi, I'm
       <span [class]="(themeService.currentTheme$ | async)?.accent">{{
-        portfolioService.personalInfo.name
+        personalInfo.name
       }}</span>
     </h1>
     <h2
       [class]="(themeService.currentTheme$ | async)?.textSecondary"
       class="text-xl sm:text-2xl mb-8"
     >
-      {{ portfolioService.personalInfo.title }}
+      {{ personalInfo.title }}
     </h2>
     <p
       [class]="(themeService.currentTheme$ | async)?.textSecondary"
       class="text-lg mb-8 max-w-2xl mx-auto"
     >
-      {{ portfolioService.personalInfo.about }}
+      {{ personalInfo.about }}
     </p>
     <div class="flex justify-center space-x-6">
       <a
-        [href]="portfolioService.personalInfo.github"
+        [href]="personalInfo.github"
         [ngClass]="[
           (themeService.currentTheme$ | async)?.textMuted,
           (themeService.currentTheme$ | async)?.accentHover
@@ -46,7 +49,7 @@
         </svg>
       </a>
       <a
-        [href]="portfolioService.personalInfo.linkedin"
+        [href]="personalInfo.linkedin"
         [ngClass]="[
           (themeService.currentTheme$ | async)?.textMuted,
           (themeService.currentTheme$ | async)?.accentHover
