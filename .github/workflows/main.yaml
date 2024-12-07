@@ -19,6 +19,9 @@ jobs:
 
       - name: Install npm dependencies
         run: npm install 
+      
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
 
       - name: Deploy to Github Pages
         run: ng deploy --repo={{ secrets.GH_DEPLOYMENT_REPO }} --name={{ secrets.GH_USERNAME }} --email={{ secrets.GH_EMAIL }}
