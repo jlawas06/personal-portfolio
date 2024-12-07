@@ -13,6 +13,8 @@ export class PortfolioService {
     { name: 'Contact', href: '#contact' },
   ];
 
+  readonly title = 'johnlloydlawas.dev';
+
   readonly employment: Job[] = [
     {
       company: 'Tech Solutions Inc.',
@@ -72,7 +74,7 @@ export class PortfolioService {
 
   readonly personalInfo = {
     name: 'John Lloyd Lawas',
-    title: 'Full Stack Software Engineer',
+    title: 'Full Stack Developer',
     email: 'johnlloydlawas06@gmail.com',
     about: `I build exceptional digital experiences with modern technologies.
             Passionate about creating efficient, scalable, and user-friendly applications.`,
@@ -80,5 +82,4 @@ export class PortfolioService {
     linkedin: 'https://www.linkedin.com/in/john-lloyd-lawas',
   };
 
-  readonly title = 'johnlloydlawas.dev'
 }
