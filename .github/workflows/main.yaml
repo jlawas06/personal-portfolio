@@ -25,3 +25,5 @@ jobs:
 
       - name: Deploy to Github Pages
         run: ng deploy --repo=${{ secrets.GH_DEPLOYMENT_REPO }} --name=${{ secrets.GH_USERNAME }} --email=${{ secrets.GH_EMAIL }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
