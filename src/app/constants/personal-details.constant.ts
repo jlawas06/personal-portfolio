@@ -6,4 +6,5 @@ export const PERSONAL_DETAILS = {
             Passionate about creating efficient, scalable, and user-friendly applications.`,
   github: 'https://github.com/jlawas06',
   linkedin: 'https://www.linkedin.com/in/john-lloyd-lawas',
+  location: "Cebu City, PH",
 };
