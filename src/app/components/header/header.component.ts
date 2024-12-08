@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PortfolioService, ThemeService } from '../../services';
+import { NAV_LINKS, TITLE } from '../../constants';
+import { ThemeService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +12,13 @@ import { PortfolioService, ThemeService } from '../../services';
 })
 export class HeaderComponent {
   public themeService = inject(ThemeService);
-  public portfolioService = inject(PortfolioService);
 
   isMenuOpen = false;
   isDark$ = this.themeService.isDarkMode$;
   theme$ = this.themeService.currentTheme$;
+
+  navLinks = NAV_LINKS;
+  title = TITLE;
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;

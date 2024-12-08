@@ -8,7 +8,6 @@ export interface Job {
   position: string;
   period: string;
   location: string;
-  description: string;
   achievements: string[];
   technologies: string[];
 }

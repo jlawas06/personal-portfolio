@@ -11,12 +11,12 @@
         [class]="(themeService.currentTheme$ | async)?.accent"
         class="text-xl font-bold"
       >
-        {{ portfolioService.title }}
+        {{ title }}
       </a>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <ng-container *ngFor="let link of portfolioService.navLinks">
+        <ng-container *ngFor="let link of navLinks">
           <a
             [href]="link.href"
             [ngClass]="[
@@ -159,7 +159,7 @@
     [ngClass]="(themeService.currentTheme$ | async)?.border"
   >
     <div class="flex flex-col space-y-4 px-4 py-6">
-      <ng-container *ngFor="let link of portfolioService.navLinks">
+      <ng-container *ngFor="let link of navLinks">
         <a
           [href]="link.href"
           [ngClass]="[
