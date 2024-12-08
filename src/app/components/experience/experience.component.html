@@ -103,22 +103,8 @@
           </div>
         </div>
 
-        <!-- Description -->
-        <p
-          [class]="(themeService.currentTheme$ | async)?.textSecondary"
-          class="mb-6"
-        >
-          {{ job.description }}
-        </p>
-
         <!-- Achievements -->
         <div class="mb-6">
-          <h5
-            [class]="(themeService.currentTheme$ | async)?.text"
-            class="font-semibold mb-3"
-          >
-            Key Achievements
-          </h5>
           <ul class="space-y-3">
             <li
               *ngFor="let achievement of job.achievements"
