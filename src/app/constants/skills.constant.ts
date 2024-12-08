@@ -6,6 +6,7 @@ export const TECH_STACK = [
       { name: 'TypeScript' },
       { name: 'Angular' },
       { name: 'React' },
+      { name: 'Next.js' },
       { name: 'JQuery' },
       { name: 'HTML5/CSS3' },
       { name: 'Kendo UI' },
