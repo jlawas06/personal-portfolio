@@ -25,3 +25,31 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Docker
+
+This project includes Docker configuration for both development and production environments.
+
+### Development
+
+To run the application in development mode with Docker:
+
+```bash
+docker-compose up
+```
+
+This will start the application in development mode with hot reload enabled. The application will be available at `http://localhost:4200`.
+
+### Production
+
+To build and run the production version:
+
+```bash
+# Build the production Docker image
+docker build -t personal-portfolio .
+
+# Run the container
+docker run -p 80:80 personal-portfolio
+```
+
+The production build will be served by Nginx and available at `http://localhost`.

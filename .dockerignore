@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+.dockerignore
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build output
+/dist
+/.angular
+
+# IDE
+.idea
+.vscode
+*.sublime-workspace
+
+# System Files
+.DS_Store
+Thumbs.db 
