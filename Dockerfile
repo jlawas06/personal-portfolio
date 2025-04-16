@@ -15,17 +15,16 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Stage 2: Serve the application with Nginx
-FROM nginx:alpine
+# Stage 2: Serve with a lightweight Node server
+FROM node:20-alpine
 
-# Copy the build output to replace the default nginx contents
-COPY --from=build /app/dist/personal-portfolio/browser /usr/share/nginx/html
+WORKDIR /app
 
-# Copy custom Nginx config if needed
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Install a simple HTTP server
+RUN npm install -g serve@14.2.1
 
-# Expose port 80
-EXPOSE 80
+# Copy the build from the previous stage
+COPY --from=build /app/dist/personal-portfolio/browser /app
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"] 
+# Start the server
+CMD ["serve", "-s", ".", "-l", "80"] 
