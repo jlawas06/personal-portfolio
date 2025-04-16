@@ -1,15 +1,33 @@
-version: '3.8'
-
 services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    container_name: angular-portfolio-dev
+      dockerfile: Dockerfile
+    container_name: app
+    restart: unless-stopped
+    networks:
+      - web
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
     ports:
-      - "4200:4200"
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development 
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+    depends_on:
+      - app
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config: 

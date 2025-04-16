@@ -35,21 +35,30 @@ This project includes Docker configuration for both development and production e
 To run the application in development mode with Docker:
 
 ```bash
-docker-compose up
+# Build with dev Dockerfile
+docker build -f Dockerfile.dev -t portfolio-dev .
+
+# Run the container
+docker run -p 4200:4200 -v $(pwd):/app portfolio-dev
 ```
 
 This will start the application in development mode with hot reload enabled. The application will be available at `http://localhost:4200`.
 
-### Production
+### Production with Caddy (HTTPS)
 
-To build and run the production version:
+To deploy the production version with automatic HTTPS:
+
+1. Edit the `Caddyfile` and replace `yourdomain.com` with your actual domain.
+
+2. Run the Docker Compose stack:
 
 ```bash
-# Build the production Docker image
-docker build -t personal-portfolio .
-
-# Run the container
-docker run -p 80:80 personal-portfolio
+docker-compose up -d
 ```
 
-The production build will be served by Nginx and available at `http://localhost`.
+Caddy will automatically:
+- Obtain and renew SSL certificates
+- Redirect HTTP to HTTPS
+- Proxy requests to your Angular app
+
+Your site will be available at `https://yourdomain.com`.
