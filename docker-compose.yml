@@ -7,6 +7,21 @@ services:
     restart: unless-stopped
     networks:
       - web
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: email-server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    networks:
+      - web
+    ports:
+      - "3000:3000"
 
   caddy:
     image: caddy:latest
@@ -23,6 +38,7 @@ services:
       - web
     depends_on:
       - app
+      - server
 
 networks:
   web:

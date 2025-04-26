@@ -1,7 +1,15 @@
 # Configuration for johnlloydlawas.com and www.johnlloydlawas.com
 johnlloydlawas.com, www.johnlloydlawas.com {
-    reverse_proxy app:80 {
-        flush_interval -1
+    # Route API requests to the server service
+    handle /api/* {
+        reverse_proxy server:3000
+    }
+
+    # Route everything else to the app service
+    handle {
+        reverse_proxy app:80 {
+            flush_interval -1
+        }
     }
 
     encode gzip

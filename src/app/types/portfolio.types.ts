@@ -33,6 +33,10 @@ export interface Theme {
   border: string;
   navBg: string;
   cardHover: string;
+  inputBg?: string;
+  inputBorder?: string;
+  textPrimary?: string;
+  accentRing?: string;
 }
 
 export interface ThemeConfig {
