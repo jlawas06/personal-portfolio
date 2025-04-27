@@ -1,6 +1,9 @@
-<section id="projects" class="py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-      <h2 [class]="(themeService.currentTheme$ | async)?.accent" class="text-3xl font-bold mb-12" data-aos="fade-up">
+<section id="projects" class="py-20 px-4 relative">
+    <div class="circuit-decoration top-left"></div>
+    <div class="circuit-decoration bottom-right"></div>
+    
+    <div class="max-w-6xl mx-auto relative z-10">
+      <h2 [class]="(themeService.currentTheme$ | async)?.accent" class="text-3xl font-bold mb-12 circuit-node" data-aos="fade-up">
         Featured Projects
       </h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

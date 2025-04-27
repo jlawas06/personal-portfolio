@@ -1,9 +1,12 @@
 <section
   id="skills"
-  class="py-20 px-4"
+  class="py-20 px-4 relative"
   [class]="(themeService.isDarkMode$ | async) ? 'bg-gray-800/50' : 'bg-gray-50'"
 >
-  <div class="max-w-6xl mx-auto">
+  <div class="circuit-decoration top-right"></div>
+  <div class="circuit-decoration bottom-left"></div>
+  
+  <div class="max-w-6xl mx-auto relative z-10">
     <h2
       [class]="(themeService.currentTheme$ | async)?.accent"
       class="text-3xl font-bold mb-12"
@@ -24,7 +27,7 @@
         <!-- Category Header -->
         <h3
           [class]="(themeService.currentTheme$ | async)?.accent"
-          class="text-xl font-semibold mb-6 flex items-center space-x-2"
+          class="text-xl font-semibold mb-6 flex items-center space-x-2 circuit-node"
         >
           <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path 

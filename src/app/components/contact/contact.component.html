@@ -3,14 +3,14 @@
   [class]="(themeService.currentTheme$ | async)?.card"
   class="py-20 px-4 relative"
 >
-  <div class="max-w-4xl mx-auto">
+  <div class="circuit-decoration top-left"></div>
+  <div class="circuit-decoration bottom-right"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
     <!-- Section Header -->
     <div class="text-center mb-12" data-aos="fade-up">
-      <h2
-        [class]="(themeService.currentTheme$ | async)?.accent"
-        class="text-3xl font-bold mb-4"
-      >
-        Get In Touch
+      <h2 [class]="(themeService.currentTheme$ | async)?.text" class="text-3xl font-bold mb-4 tracking-tight circuit-node">
+        Get in <span [class]="(themeService.currentTheme$ | async)?.accent">Touch</span>
       </h2>
       <p
         [class]="(themeService.currentTheme$ | async)?.textSecondary"

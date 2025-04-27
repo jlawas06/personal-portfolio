@@ -1,6 +1,6 @@
 import { NavLink } from "../types";
 
-export const TITLE = 'johnlloydlawas.com';
+export const TITLE = 'John Lloyd Lawas';
 
 export const NAV_LINKS: NavLink[] = [
   { name: 'About', href: '#about' },
