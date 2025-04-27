@@ -13,4 +13,5 @@ import { ThemeService } from '../../services';
 export class ContactComponent {
   public themeService = inject(ThemeService);
   personalInfo = PERSONAL_DETAILS;
+  currentYear = new Date().getFullYear();
 }
