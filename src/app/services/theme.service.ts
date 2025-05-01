@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Theme, ThemeConfig } from '../types/portfolio.types';
 
+const THEME_STORAGE_KEY = 'portfolioTheme';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -46,9 +48,17 @@ export class ThemeService {
   currentTheme$ = this.currentTheme.asObservable();
 
   constructor() {
-    // Initialize theme based on user preference
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    this.setTheme(prefersDark);
+    // Check if theme is saved in localStorage
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    
+    if (savedTheme !== null) {
+      // Use saved theme preference
+      this.setTheme(savedTheme === 'dark');
+    } else {
+      // Initialize theme based on user system preference
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.setTheme(prefersDark);
+    }
   }
 
   toggleTheme(): void {
@@ -61,6 +71,9 @@ export class ThemeService {
     this.currentTheme.next(
       isDark ? this.themeConfig.dark : this.themeConfig.light
     );
+    
+    // Save theme preference to localStorage
+    localStorage.setItem(THEME_STORAGE_KEY, isDark ? 'dark' : 'light');
     
     // Add or remove dark class from body
     if (isDark) {
