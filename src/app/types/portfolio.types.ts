@@ -33,6 +33,7 @@ export interface Theme {
   border: string;
   navBg: string;
   cardHover: string;
+  formInput: string;
 }
 
 export interface ThemeConfig {

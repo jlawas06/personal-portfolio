@@ -20,6 +20,7 @@ export class ThemeService {
       border: 'border-gray-700',
       navBg: 'bg-gray-900/80',
       cardHover: 'hover:bg-gray-700/50',
+      formInput: 'bg-gray-700 border-gray-600 text-gray-100 focus:ring-cyan-500 focus:border-cyan-500',
     },
     light: {
       background: 'bg-gray-50',
@@ -34,6 +35,7 @@ export class ThemeService {
       border: 'border-gray-200',
       navBg: 'bg-white/80',
       cardHover: 'hover:bg-gray-50',
+      formInput: 'bg-white border-gray-300 text-gray-900 focus:ring-cyan-500 focus:border-cyan-500',
     },
   };
 

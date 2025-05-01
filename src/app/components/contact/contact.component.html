@@ -21,49 +21,137 @@
       </p>
     </div>
 
-    <!-- Contact Details -->
+    <!-- Contact Form -->
     <div class="max-w-2xl mx-auto">
-      <!-- Email Card -->
-      <div
+      <form 
+        [formGroup]="contactForm" 
+        (ngSubmit)="onSubmit()"
         [class]="(themeService.currentTheme$ | async)?.card!"
         class="mb-8 p-8 rounded-lg border shadow-lg transition-all duration-300 hover:shadow-xl glass"
         [ngClass]="(themeService.currentTheme$ | async)?.border"
         data-aos="zoom-in"
         data-aos-delay="100"
       >
-        <div class="flex flex-col md:flex-row items-center justify-between">
-          <div class="flex items-center mb-4 md:mb-0">
-            <div class="mr-4 p-3 rounded-full" [class]="(themeService.isDarkMode$ | async) ? 'bg-cyan-500/20' : 'bg-cyan-100'">
-              <svg class="w-6 h-6" [class]="(themeService.currentTheme$ | async)?.accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div class="text-left">
-              <h3
-                [class]="(themeService.currentTheme$ | async)?.textSecondary"
-                class="text-md font-medium"
-              >
-                Email me at:
-              </h3>
-              <a
-                [href]="'mailto:' + personalInfo.email"
-                [class]="(themeService.currentTheme$ | async)?.accent"
-                class="text-xl font-semibold hover:underline"
-              >
-                {{ personalInfo.email }}
-              </a>
-            </div>
-          </div>
-          <a
-            [href]="'mailto:' + personalInfo.email"
-            [class]="(themeService.currentTheme$ | async)?.button!"
-            [ngClass]="(themeService.currentTheme$ | async)?.buttonText"
-            class="inline-block px-6 py-2 rounded-lg font-medium transition-all hover:scale-105 button-3d"
+        <!-- Name Field -->
+        <div class="mb-6">
+          <label 
+            for="name" 
+            [class]="(themeService.currentTheme$ | async)?.textSecondary"
+            class="block text-sm font-medium mb-2"
           >
-            Send Message
-          </a>
+            Your Name
+          </label>
+          <input 
+            type="text"
+            id="name"
+            formControlName="name"
+            [class]="(themeService.currentTheme$ | async)?.formInput || ''"
+            class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:outline-none transition-all"
+            [ngClass]="{
+              'border-red-500': contactForm.get('name')?.invalid && contactForm.get('name')?.touched
+            }"
+            placeholder="John Doe"
+          >
+          <div 
+            *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+            class="text-red-500 text-sm mt-1"
+          >
+            Name is required
+          </div>
         </div>
-      </div>
+
+        <!-- Email Field -->
+        <div class="mb-6">
+          <label 
+            for="email" 
+            [class]="(themeService.currentTheme$ | async)?.textSecondary"
+            class="block text-sm font-medium mb-2"
+          >
+            Your Email
+          </label>
+          <input 
+            type="email"
+            id="email"
+            formControlName="email"
+            [class]="(themeService.currentTheme$ | async)?.formInput || ''"
+            class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:outline-none transition-all"
+            [ngClass]="{
+              'border-red-500': contactForm.get('email')?.invalid && contactForm.get('email')?.touched
+            }"
+            placeholder="you@example.com"
+          >
+          <div 
+            *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+            class="text-red-500 text-sm mt-1"
+          >
+            <span *ngIf="contactForm.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="contactForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+          </div>
+        </div>
+
+        <!-- Message Field -->
+        <div class="mb-6">
+          <label 
+            for="message" 
+            [class]="(themeService.currentTheme$ | async)?.textSecondary"
+            class="block text-sm font-medium mb-2"
+          >
+            Your Message
+          </label>
+          <textarea
+            id="message"
+            formControlName="message"
+            [class]="(themeService.currentTheme$ | async)?.formInput || ''"
+            class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:outline-none transition-all resize-none"
+            [ngClass]="{
+              'border-red-500': contactForm.get('message')?.invalid && contactForm.get('message')?.touched
+            }"
+            rows="5"
+            placeholder="Hello, I'd like to talk about..."
+          ></textarea>
+          <div 
+            *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
+            class="text-red-500 text-sm mt-1"
+          >
+            Message is required
+          </div>
+        </div>
+
+        <!-- Success Message -->
+        <div 
+          *ngIf="submitSuccess" 
+          class="mb-6 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-lg"
+        >
+          Your message has been sent successfully. I'll get back to you soon!
+        </div>
+
+        <!-- Error Message -->
+        <div 
+          *ngIf="submitError" 
+          class="mb-6 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100 rounded-lg"
+        >
+          There was an error sending your message. Please try again later.
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="isSubmitting"
+          [class]="(themeService.currentTheme$ | async)?.button!"
+          [ngClass]="[
+            (themeService.currentTheme$ | async)?.buttonText,
+            isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-105'
+          ]"
+          class="w-full px-6 py-3 rounded-lg font-medium transition-all button-3d"
+        >
+          <span *ngIf="isSubmitting">
+            Sending...
+          </span>
+          <span *ngIf="!isSubmitting">
+            Send Message
+          </span>
+        </button>
+      </form>
 
       <!-- Location -->
       <div class="flex justify-center items-center mb-8 glass p-4 rounded-lg" data-aos="fade-up" data-aos-delay="200">
