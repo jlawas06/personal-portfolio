@@ -4,7 +4,7 @@ export const EMPLOYMENT_HISTORY: Job[] = [
   {
     company: 'Nowcom Global Services, LLC.',
     position: 'Mid Software Engineer III',
-    period: '2022 - Present',
+    period: '2022 - 2025',
     location: 'Pasig City, Metro Manila',
     achievements: [
       'Spearheaded the modernization of legacy applications using .NET and Angular, improving system performance by implementing modern architecture patterns and best practices',

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Theme, ThemeConfig } from '../types';
+import { Theme, ThemeConfig } from '../types/portfolio.types';
+
+const THEME_STORAGE_KEY = 'portfolioTheme';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,7 @@ export class ThemeService {
   private themeConfig: ThemeConfig = {
     dark: {
       background: 'bg-gray-900',
-      card: 'bg-gray-800',
+      card: 'bg-gray-800/90',
       text: 'text-gray-100',
       textSecondary: 'text-gray-300',
       textMuted: 'text-gray-400',
@@ -20,10 +22,11 @@ export class ThemeService {
       border: 'border-gray-700',
       navBg: 'bg-gray-900/80',
       cardHover: 'hover:bg-gray-700/50',
+      formInput: 'bg-gray-700 border-gray-600 text-gray-100 focus:ring-cyan-500 focus:border-cyan-500',
     },
     light: {
       background: 'bg-gray-50',
-      card: 'bg-white',
+      card: 'bg-white/90',
       text: 'text-gray-900',
       textSecondary: 'text-gray-600',
       textMuted: 'text-gray-500',
@@ -34,6 +37,7 @@ export class ThemeService {
       border: 'border-gray-200',
       navBg: 'bg-white/80',
       cardHover: 'hover:bg-gray-50',
+      formInput: 'bg-white border-gray-300 text-gray-900 focus:ring-cyan-500 focus:border-cyan-500',
     },
   };
 
@@ -43,11 +47,39 @@ export class ThemeService {
   private currentTheme = new BehaviorSubject<Theme>(this.themeConfig.dark);
   currentTheme$ = this.currentTheme.asObservable();
 
+  constructor() {
+    // Check if theme is saved in localStorage
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    
+    if (savedTheme !== null) {
+      // Use saved theme preference
+      this.setTheme(savedTheme === 'dark');
+    } else {
+      // Initialize theme based on user system preference
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.setTheme(prefersDark);
+    }
+  }
+
   toggleTheme(): void {
     const newDarkMode = !this.isDarkMode.value;
-    this.isDarkMode.next(newDarkMode);
+    this.setTheme(newDarkMode);
+  }
+  
+  private setTheme(isDark: boolean): void {
+    this.isDarkMode.next(isDark);
     this.currentTheme.next(
-      newDarkMode ? this.themeConfig.dark : this.themeConfig.light
+      isDark ? this.themeConfig.dark : this.themeConfig.light
     );
+    
+    // Save theme preference to localStorage
+    localStorage.setItem(THEME_STORAGE_KEY, isDark ? 'dark' : 'light');
+    
+    // Add or remove dark class from body
+    if (isDark) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
   }
 }

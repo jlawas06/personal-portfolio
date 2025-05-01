@@ -1,37 +1,44 @@
 <section
-  class="min-h-screen flex items-center justify-center px-4 pt-16"
+  class="min-h-screen flex items-center justify-center px-4 pt-16 relative"
   id="about"
 >
-  <div class="max-w-4xl text-center">
-    <h1
-      class="text-4xl sm:text-5xl font-bold mb-6"
-      [class]="(themeService.currentTheme$ | async)?.text"
-    >
-      Hi, I'm
-      <span [class]="(themeService.currentTheme$ | async)?.accent">{{
-        personalInfo.name
-      }}</span>
-    </h1>
-    <h2
-      [class]="(themeService.currentTheme$ | async)?.textSecondary"
-      class="text-xl sm:text-2xl mb-8"
-    >
-      {{ personalInfo.title }}
-    </h2>
-    <p
-      [class]="(themeService.currentTheme$ | async)?.textSecondary"
-      class="text-lg mb-8 max-w-2xl mx-auto"
-    >
-      {{ personalInfo.about }}
-    </p>
-    <div class="flex justify-center space-x-6">
+  <div class="max-w-4xl z-10">
+    <div data-aos="fade-up" data-aos-delay="100" class="text-center mb-8">
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 fadeIn"
+        [class]="(themeService.currentTheme$ | async)?.text"
+      >
+        Hi, I'm
+        <span [class]="(themeService.currentTheme$ | async)?.accent" class="inline-block hover:scale-110 transition-transform cursor-default">{{
+          personalInfo.name
+        }}</span>
+      </h1>
+      <h2
+        [class]="(themeService.currentTheme$ | async)?.textSecondary"
+        class="text-xl sm:text-2xl md:text-3xl mb-8 slideUp"
+        data-aos="fade-up" 
+        data-aos-delay="200"
+      >
+        {{ personalInfo.title }}
+      </h2>
+      <p
+        [class]="(themeService.currentTheme$ | async)?.textSecondary"
+        class="text-lg mb-8 max-w-2xl mx-auto slideUp"
+        data-aos="fade-up" 
+        data-aos-delay="300"
+      >
+        {{ personalInfo.about }}
+      </p>
+    </div>
+    
+    <div class="flex justify-center space-x-6" data-aos="fade-up" data-aos-delay="400">
       <a
         [href]="personalInfo.github"
         [ngClass]="[
           (themeService.currentTheme$ | async)?.textMuted,
           (themeService.currentTheme$ | async)?.accentHover
         ]"
-        class="transition-colors"
+        class="transition-all p-3 rounded-full hover:scale-110 button-3d"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -54,7 +61,7 @@
           (themeService.currentTheme$ | async)?.textMuted,
           (themeService.currentTheme$ | async)?.accentHover
         ]"
-        class="transition-colors"
+        class="transition-all p-3 rounded-full hover:scale-110 button-3d"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -71,6 +78,16 @@
           ></path>
           <rect x="2" y="9" width="4" height="12"></rect>
           <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Scroll down indicator -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce" data-aos="fade-up" data-aos-delay="600">
+      <a href="#experience" class="flex flex-col items-center">
+        <span [class]="(themeService.currentTheme$ | async)?.textMuted" class="text-sm mb-2">Scroll Down</span>
+        <svg class="w-6 h-6" [class]="(themeService.currentTheme$ | async)?.textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
       </a>
     </div>

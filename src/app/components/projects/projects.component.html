@@ -1,53 +1,65 @@
-<section id="projects" class="py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-      <h2 [class]="(themeService.currentTheme$ | async)?.accent" class="text-3xl font-bold mb-12">
+<section id="projects" class="py-20 px-4 relative">
+    <div class="circuit-decoration top-left"></div>
+    <div class="circuit-decoration bottom-right"></div>
+    
+    <div class="max-w-6xl mx-auto relative z-10">
+      <h2 [class]="(themeService.currentTheme$ | async)?.accent" class="text-3xl font-bold mb-12 circuit-node" data-aos="fade-up">
         Featured Projects
       </h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div *ngFor="let project of projects"
-          [class]="(themeService.currentTheme$ | async)?.card"
-          class="rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div *ngFor="let project of projects; let i = index"
+          [class]="(themeService.currentTheme$ | async)?.card!"
+          class="rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-500 project-card"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100"
+          [ngClass]="{'hover:bg-gray-700/50': (themeService.isDarkMode$ | async), 'hover:bg-gray-50': !(themeService.isDarkMode$ | async)}">
           
-          <h3 class="text-xl font-bold mb-4" [class]="(themeService.currentTheme$ | async)?.text">
+          <div class="relative overflow-hidden rounded-md mb-4 group">
+            <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-md">
+              <!-- Replace with your project images if available -->
+              <div class="w-full h-32 flex items-center justify-center"
+                [class]="(themeService.isDarkMode$ | async) ? 'bg-gray-700' : 'bg-gray-100'">
+                <svg class="w-12 h-12" [class]="(themeService.currentTheme$ | async)?.textMuted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              </div>
+            </div>
+            <!-- Overlay with buttons -->
+            <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="flex space-x-4">
+                <a [href]="project.github" 
+                   target="_blank"
+                   class="bg-white text-gray-900 p-2 rounded-full hover:bg-gray-200 transition-colors">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                </a>
+                <a [href]="project.demo" *ngIf="project.demo"
+                   target="_blank"
+                   class="bg-white text-gray-900 p-2 rounded-full hover:bg-gray-200 transition-colors">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <h3 class="text-xl font-bold mb-2 group-hover:text-cyan-500 transition-colors" [class]="(themeService.currentTheme$ | async)?.text">
             {{project.title}}
           </h3>
-          <p [class]="(themeService.currentTheme$ | async)?.textMuted" class="mb-4">
+          <p [class]="(themeService.currentTheme$ | async)?.textMuted" class="mb-4 text-sm">
             {{project.description}}
           </p>
           
           <div class="flex flex-wrap gap-2 mb-4">
             <span *ngFor="let tech of project.technologies"
               [class]="(themeService.isDarkMode$ | async) ? 'bg-gray-700' : 'bg-gray-100'"
-              class="text-sm px-3 py-1 rounded-full"
+              class="text-xs px-2 py-1 rounded-full"
               [ngClass]="(themeService.currentTheme$ | async)?.textSecondary">
               {{tech}}
             </span>
-          </div>
-          
-          <div class="flex space-x-4">
-            <a [href]="project.github" 
-               target="_blank"
-               [ngClass]="[
-                 (themeService.currentTheme$ | async)?.textMuted,
-                 (themeService.currentTheme$ | async)?.accentHover
-               ]"
-               class="transition-colors">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-            </a>
-            <a [href]="project.demo" *ngIf="project.demo"
-               target="_blank"
-               [ngClass]="[
-                 (themeService.currentTheme$ | async)?.textMuted,
-                 (themeService.currentTheme$ | async)?.accentHover
-               ]"
-               class="transition-colors">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-              </svg>
-            </a>
           </div>
         </div>
       </div>

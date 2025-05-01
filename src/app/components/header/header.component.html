@@ -1,6 +1,6 @@
 <nav
   [class]="(themeService.currentTheme$ | async)?.navBg!"
-  class="fixed w-full backdrop-blur-sm z-50 border-b transition-colors duration-300"
+  class="fixed w-full backdrop-blur-md z-50 border-b transition-colors duration-300 glass"
   [ngClass]="(themeService.currentTheme$ | async)?.border"
 >
   <div class="max-w-6xl mx-auto px-4 py-4">
@@ -9,9 +9,10 @@
       <a
         href="#"
         [class]="(themeService.currentTheme$ | async)?.accent"
-        class="text-xl font-bold"
+        class="text-xl font-bold relative group"
       >
-        {{ title }}
+        <span class="relative z-10">{{ title }}</span>
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -23,9 +24,10 @@
               (themeService.currentTheme$ | async)?.textSecondary,
               (themeService.currentTheme$ | async)?.accentHover
             ]"
-            class="transition-colors"
+            class="transition-colors relative group py-1"
           >
-            {{ link.name }}
+            <span class="relative z-10">{{ link.name }}</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
           </a>
         </ng-container>
 
@@ -36,7 +38,7 @@
             (themeService.currentTheme$ | async)?.textMuted,
             (themeService.currentTheme$ | async)?.accentHover
           ]"
-          class="p-2 rounded-full transition-colors"
+          class="p-2 rounded-full transition-all hover:scale-110"
         >
           <svg
             *ngIf="themeService.isDarkMode$ | async"
@@ -115,6 +117,7 @@
         <button
           (click)="toggleMenu()"
           [class]="(themeService.currentTheme$ | async)?.textMuted"
+          class="transition-transform hover:rotate-90 duration-300"
         >
           <svg
             *ngIf="!isMenuOpen"
@@ -155,7 +158,7 @@
   <div
     *ngIf="isMenuOpen"
     [class]="(themeService.currentTheme$ | async)?.card!"
-    class="md:hidden border-t transition-colors duration-300"
+    class="md:hidden border-t transition-all duration-300 glass"
     [ngClass]="(themeService.currentTheme$ | async)?.border"
   >
     <div class="flex flex-col space-y-4 px-4 py-6">
