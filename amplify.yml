@@ -1,0 +1,22 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - npm ci --cache .npm --prefer-offline
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npx ng version
+    build:
+      commands:
+        - npx ng build --configuration=production
+  artifacts:
+    baseDirectory: dist/personal-portfolio/browser
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .npm/**/*
+      - node_modules/**/*
