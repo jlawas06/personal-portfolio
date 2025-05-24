@@ -27,4 +27,4 @@ RUN npm install -g serve@14.2.1
 COPY --from=build /app/dist/personal-portfolio/browser /app
 
 # Start the server
-CMD ["serve", "-s", ".", "-l", "80"] 
+CMD ["serve", "-s", ".", "-l", "3000"] 

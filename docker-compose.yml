@@ -1,33 +1,8 @@
 services:
-  app:
+  personal-portfolio:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: personal-portfolio
     restart: unless-stopped
-    networks:
-      - web
 
-  caddy:
-    image: caddy:latest
-    container_name: caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - web
-    depends_on:
-      - app
-
-networks:
-  web:
-    driver: bridge
-
-volumes:
-  caddy_data:
-  caddy_config: 
