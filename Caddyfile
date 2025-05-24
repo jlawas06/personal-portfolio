@@ -1,8 +1,0 @@
-# Configuration for johnlloydlawas.com and www.johnlloydlawas.com
-johnlloydlawas.com, www.johnlloydlawas.com {
-    reverse_proxy app:80 {
-        flush_interval -1
-    }
-
-    encode gzip
-}
