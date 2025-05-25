@@ -7,20 +7,20 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies (including dev dependencies for build)
+RUN npm ci
 
 # Copy source code
 COPY . .
 
 # Build the Angular application
-RUN npm run build --prod
+RUN npm run build
 
 # Production stage with Nginx
 FROM nginx:alpine
 
 # Copy built application from build stage
-COPY --from=build /app/dist/* /usr/share/nginx/html/
+COPY --from=build /app/dist/personal-portfolio/* /usr/share/nginx/html/
 
 # Copy custom nginx configuration (optional)
 COPY nginx.conf /etc/nginx/nginx.conf
