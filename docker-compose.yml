@@ -1,63 +1,14 @@
+version: '3.8'
+
 services:
   personal-portfolio:
+    container_name: personal-portfolio
     build:
       context: .
       dockerfile: Dockerfile
-      # Use build args for different environments
-      args:
-        NODE_ENV: production
-    container_name: personal-portfolio
-    restart: unless-stopped
-    
-    # Resource limits
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 256M
-        reservations:
-          cpus: '0.1'
-          memory: 64M
-    
-    # Security
-    security_opt:
-      - no-new-privileges:true
-    
-    # Read-only root filesystem for security
-    read_only: true
-    
-    # Temporary filesystems for writable directories
-    tmpfs:
-      - /tmp
-      - /var/cache/nginx
-      - /var/log/nginx
-      - /var/run
-    
-    # Expose port (internal only, Caddy will proxy)
     ports:
-      - "8888:8888"
-    
-    # Health check
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    
-    # Environment variables
+      - "8080:80"
     environment:
       - NODE_ENV=production
+    restart: unless-stopped
     
-    # Logging
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-    
-    # Labels for organization
-    labels:
-      - "traefik.enable=false"  # Since you're using Caddy
-      - "app=personal-portfolio"
-      - "env=production"
