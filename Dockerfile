@@ -1,26 +1,30 @@
-# Use Node.js to serve the Angular application
-FROM node:20-alpine
+# Stage 1: Build the Angular application
+FROM node:20-alpine as build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
 RUN npm ci
 
-# Copy source code
+# Copy the rest of the application code
 COPY . .
 
-# Build the Angular application
+# Build the application
 RUN npm run build
 
+# Stage 2: Serve with a lightweight Node server
+FROM node:20-alpine
+
+WORKDIR /app
+
 # Install a simple HTTP server
-RUN npm install -g http-server
+RUN npm install -g serve
 
-# Expose port 8080
-EXPOSE 8080
+# Copy the build from the previous stage
+COPY --from=build /app/dist/personal-portfolio/browser /app
 
-# Serve the built application
-CMD ["http-server", "dist/personal-portfolio/browser", "-p", "8080", "--cors",]
+# Start the server
+CMD ["serve", "-s", ".", "-l", "8080"] 
