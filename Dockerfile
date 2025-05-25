@@ -1,5 +1,5 @@
 # Use Node.js to serve the Angular application
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
@@ -23,4 +23,4 @@ RUN npm install -g http-server
 EXPOSE 8080
 
 # Serve the built application
-CMD ["http-server", "dist/personal-portfolio", "-p", "8080", "--cors", "-c-1"]
+CMD ["http-server", "dist/personal-portfolio", "-p", "8080", "--cors",]
