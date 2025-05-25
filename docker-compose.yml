@@ -35,7 +35,7 @@ services:
     
     # Expose port (internal only, Caddy will proxy)
     ports:
-      - "3000:8080"
+      - "8888:8888"
     
     # Health check
     healthcheck:
