@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   personal-portfolio:
@@ -7,8 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8080:8080"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
-    

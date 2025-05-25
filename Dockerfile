@@ -1,5 +1,5 @@
-# Multi-stage build for Angular application
-FROM node:18-alpine as build
+# Use Node.js to serve the Angular application
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (including dev dependencies for build)
+# Install dependencies
 RUN npm ci
 
 # Copy source code
@@ -16,17 +16,11 @@ COPY . .
 # Build the Angular application
 RUN npm run build
 
-# Production stage with Nginx
-FROM nginx:alpine
+# Install a simple HTTP server
+RUN npm install -g http-server
 
-# Copy built application from build stage
-COPY --from=build /app/dist/personal-portfolio/* /usr/share/nginx/html/
+# Expose port 8080
+EXPOSE 8080
 
-# Copy custom nginx configuration (optional)
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the built application
+CMD ["http-server", "dist/personal-portfolio", "-p", "8080", "--cors", "-c-1"]
