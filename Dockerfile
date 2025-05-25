@@ -23,4 +23,4 @@ RUN npm install -g http-server
 EXPOSE 8080
 
 # Serve the built application
-CMD ["http-server", "dist/personal-portfolio", "-p", "8080", "--cors",]
+CMD ["http-server", "dist/personal-portfolio/browser", "-p", "8080", "--cors",]
