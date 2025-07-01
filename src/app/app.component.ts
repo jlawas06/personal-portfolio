@@ -9,8 +9,7 @@ import { HeroComponent } from './components/hero/hero.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SkillsComponent } from './components/skills/skills.component';
 
-// Modules
-import { ParticlesModule } from './components/particles-background/particles.module';
+
 
 // Services
 import { ThemeService } from './services';
@@ -25,8 +24,7 @@ import { ThemeService } from './services';
     ExperienceComponent,
     SkillsComponent,
     ProjectsComponent,
-    ContactComponent,
-    ParticlesModule
+    ContactComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
