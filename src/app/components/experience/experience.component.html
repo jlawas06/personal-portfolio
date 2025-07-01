@@ -1,36 +1,35 @@
-<section id="experience" class="py-20 px-4 relative">
-  <div class="circuit-decoration top-right"></div>
-  <div class="circuit-decoration bottom-left"></div>
-
-  <div class="max-w-6xl mx-auto relative z-10">
-    <h2
-      [class]="(themeService.currentTheme$ | async)?.accent"
-      class="text-3xl font-bold mb-12 circuit-node"
-      data-aos="fade-up"
-    >
-      Experience
-    </h2>
+<section id="experience" class="py-16 sm:py-20 px-4 relative">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 animate-fade-in">
+      <h2
+        [class]="(themeService.currentTheme$ | async)?.accent"
+        class="text-3xl sm:text-4xl font-bold mb-4"
+      >
+        Experience
+      </h2>
+      <p 
+        [class]="(themeService.currentTheme$ | async)?.textSecondary"
+        class="text-lg max-w-2xl mx-auto"
+      >
+        My professional journey and key achievements
+      </p>
+    </div>
+    
     <div class="space-y-8">
       <div
         *ngFor="let job of employment; let i = index"
-        class="rounded-lg p-8 shadow-lg transition-all duration-500 hover:shadow-xl glass {{(themeService.currentTheme$ | async)?.card}}"
-        [ngClass]="{'hover:bg-gray-700/50': (themeService.isDarkMode$ | async), 'hover:bg-gray-50': !(themeService.isDarkMode$ | async)}"
-        data-aos="fade-up"
-        [attr.data-aos-delay]="i * 100"
+        class="rounded-xl p-6 sm:p-8 shadow-lg modern-card glass-modern animate-slide-up"
+        [class]="(themeService.currentTheme$ | async)?.card"
+        [style.animation-delay]="(i * 0.2) + 's'"
+        [style.animation-fill-mode]="'both'"
       >
-        <div
-          class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6"
-        >
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-6">
           <!-- Company Info -->
-          <div class="space-y-2">
+          <div class="space-y-3">
             <div class="flex items-center space-x-3">
               <div
-                [class]="
-                  (themeService.isDarkMode$ | async)
-                    ? 'bg-cyan-500/20'
-                    : 'bg-cyan-100'
-                "
-                class="p-2 rounded-lg transition-transform hover:scale-110 duration-300"
+                [class]="(themeService.isDarkMode$ | async) ? 'bg-cyan-500/20' : 'bg-cyan-100'"
+                class="p-2.5 rounded-lg transition-transform hover:scale-105 duration-300"
               >
                 <svg
                   [class]="(themeService.currentTheme$ | async)?.accent"
@@ -38,34 +37,36 @@
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  stroke-width="2"
                 >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
                     d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                   />
                 </svg>
               </div>
-              <h3
-                class="text-xl font-bold"
-                [class]="(themeService.currentTheme$ | async)?.text"
-              >
-                {{ job.company }}
-              </h3>
+              <div>
+                <h3
+                  class="text-xl font-bold"
+                  [class]="(themeService.currentTheme$ | async)?.text"
+                >
+                  {{ job.company }}
+                </h3>
+                <h4
+                  [class]="(themeService.currentTheme$ | async)?.accent"
+                  class="text-lg font-semibold"
+                >
+                  {{ job.position }}
+                </h4>
+              </div>
             </div>
-            <h4
-              [class]="(themeService.currentTheme$ | async)?.accent"
-              class="text-lg font-semibold"
-            >
-              {{ job.position }}
-            </h4>
           </div>
 
           <!-- Duration and Location -->
           <div
             [class]="(themeService.currentTheme$ | async)?.textMuted!"
-            class="space-y-2 p-3 rounded-lg"
+            class="space-y-2 p-4 rounded-lg glass-modern"
             [ngClass]="(themeService.isDarkMode$ | async) ? 'bg-gray-800/50' : 'bg-gray-100/50'"
           >
             <div class="flex items-center space-x-2">
@@ -74,15 +75,15 @@
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                stroke-width="2"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span>{{ job.period }}</span>
+              <span class="text-sm font-medium">{{ job.period }}</span>
             </div>
             <div class="flex items-center space-x-2">
               <svg
@@ -90,21 +91,20 @@
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                stroke-width="2"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                 />
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <span>{{ job.location }}</span>
+              <span class="text-sm font-medium">{{ job.location }}</span>
             </div>
           </div>
         </div>
@@ -113,27 +113,26 @@
         <div class="mb-6">
           <ul class="space-y-3">
             <li
-              *ngFor="let achievement of job.achievements; let j = index"
-              class="flex items-start transform transition-all hover:translate-x-1"
-              data-aos="fade-right"
-              [attr.data-aos-delay]="100 + j * 50"
+              *ngFor="let achievement of job.achievements"
+              class="flex items-start group"
             >
               <svg
                 [class]="(themeService.currentTheme$ | async)?.accent"
-                class="w-4 h-4 mt-1.5 mr-2 flex-shrink-0"
+                class="w-4 h-4 mt-1.5 mr-3 flex-shrink-0 transition-transform group-hover:scale-110"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                stroke-width="2"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
               <span
                 [class]="(themeService.currentTheme$ | async)?.textSecondary"
+                class="leading-relaxed"
               >
                 {{ achievement }}
               </span>
@@ -142,14 +141,12 @@
         </div>
 
         <!-- Technologies -->
-        <div class="flex flex-wrap gap-2" data-aos="fade-up" data-aos-delay="50">
+        <div class="flex flex-wrap gap-2">
           <span
             *ngFor="let tech of job.technologies"
-            [class]="
-              (themeService.isDarkMode$ | async) ? 'bg-gray-700/70' : 'bg-gray-100'
-            "
+            [class]="(themeService.isDarkMode$ | async) ? 'bg-gray-700/70' : 'bg-gray-100'"
             [ngClass]="(themeService.currentTheme$ | async)?.textSecondary"
-            class="px-3 py-1 rounded-full text-sm transition-all hover:bg-cyan-500/20 hover:scale-105"
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 hover:bg-cyan-500/20 hover:scale-105"
           >
             {{ tech }}
           </span>

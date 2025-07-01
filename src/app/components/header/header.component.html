@@ -1,15 +1,16 @@
 <nav
   [class]="(themeService.currentTheme$ | async)?.navBg!"
-  class="fixed w-full backdrop-blur-md z-50 border-b transition-colors duration-300 glass"
+  class="fixed w-full backdrop-blur-md z-50 border-b transition-all duration-300 glass-modern"
   [ngClass]="(themeService.currentTheme$ | async)?.border"
 >
-  <div class="max-w-6xl mx-auto px-4 py-4">
-    <div class="flex justify-between items-center">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <a
         href="#"
         [class]="(themeService.currentTheme$ | async)?.accent"
-        class="text-xl font-bold relative group"
+        class="text-xl font-bold relative group transition-colors duration-300"
+        aria-label="Navigate to home"
       >
         <span class="relative z-10">{{ title }}</span>
         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
@@ -24,7 +25,7 @@
               (themeService.currentTheme$ | async)?.textSecondary,
               (themeService.currentTheme$ | async)?.accentHover
             ]"
-            class="transition-colors relative group py-1"
+            class="font-medium transition-colors duration-300 relative group py-2"
           >
             <span class="relative z-10">{{ link.name }}</span>
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
@@ -38,7 +39,8 @@
             (themeService.currentTheme$ | async)?.textMuted,
             (themeService.currentTheme$ | async)?.accentHover
           ]"
-          class="p-2 rounded-full transition-all hover:scale-110"
+          class="p-2 rounded-full transition-all duration-300 btn-modern"
+          aria-label="Toggle theme"
         >
           <svg
             *ngIf="themeService.isDarkMode$ | async"
@@ -47,11 +49,11 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             />
           </svg>
@@ -62,26 +64,28 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
             />
           </svg>
         </button>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <div class="md:hidden flex items-center space-x-4">
+      <!-- Mobile Menu Controls -->
+      <div class="md:hidden flex items-center space-x-3">
+        <!-- Mobile Theme Toggle -->
         <button
           (click)="themeService.toggleTheme()"
           [ngClass]="[
             (themeService.currentTheme$ | async)?.textMuted,
             (themeService.currentTheme$ | async)?.accentHover
           ]"
-          class="p-2 rounded-full transition-colors"
+          class="p-2 rounded-full transition-all duration-300 btn-modern"
+          aria-label="Toggle theme"
         >
           <svg
             *ngIf="themeService.isDarkMode$ | async"
@@ -90,11 +94,11 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             />
           </svg>
@@ -105,19 +109,23 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
             />
           </svg>
         </button>
+        
+        <!-- Mobile Menu Button -->
         <button
           (click)="toggleMenu()"
           [class]="(themeService.currentTheme$ | async)?.textMuted"
-          class="transition-transform hover:rotate-90 duration-300"
+          class="p-2 rounded-full transition-all duration-300 btn-modern"
+          [attr.aria-expanded]="isMenuOpen"
+          aria-label="Toggle navigation menu"
         >
           <svg
             *ngIf="!isMenuOpen"
@@ -126,11 +134,11 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
@@ -141,11 +149,11 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
@@ -158,10 +166,10 @@
   <div
     *ngIf="isMenuOpen"
     [class]="(themeService.currentTheme$ | async)?.card!"
-    class="md:hidden border-t transition-all duration-300 glass"
+    class="md:hidden border-t transition-all duration-300 glass-modern"
     [ngClass]="(themeService.currentTheme$ | async)?.border"
   >
-    <div class="flex flex-col space-y-4 px-4 py-6">
+    <div class="px-4 py-6 space-y-4">
       <ng-container *ngFor="let link of navLinks">
         <a
           [href]="link.href"
@@ -169,7 +177,7 @@
             (themeService.currentTheme$ | async)?.textSecondary,
             (themeService.currentTheme$ | async)?.accentHover
           ]"
-          class="transition-colors"
+          class="block py-3 px-4 rounded-lg font-medium transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700"
           (click)="toggleMenu()"
         >
           {{ link.name }}

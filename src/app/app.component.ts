@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import * as AOS from 'aos';
-import { AnimationsModule } from './animations.module';
+import { Component, inject, OnInit } from '@angular/core';
+
+// Components
 import { ContactComponent } from './components/contact/contact.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SkillsComponent } from './components/skills/skills.component';
+
+// Modules
+import { ParticlesModule } from './components/particles-background/particles.module';
+
+// Services
 import { ThemeService } from './services';
 
 @Component({
@@ -15,33 +20,32 @@ import { ThemeService } from './services';
   standalone: true,
   imports: [
     CommonModule,
+    HeaderComponent,
     HeroComponent,
     ExperienceComponent,
+    SkillsComponent,
     ProjectsComponent,
     ContactComponent,
-    SkillsComponent,
-    HeaderComponent,
-    AnimationsModule,
+    ParticlesModule
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   public themeService = inject(ThemeService);
   
-  ngOnInit() {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
+  ngOnInit(): void {
+    // Initialize theme
+    console.log('App initialized with modern optimizations');
   }
-  
+
   scrollToContact(): void {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    const contactElement = document.getElementById('contact');
+    if (contactElement) {
+      contactElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   }
 }

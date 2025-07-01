@@ -1,0 +1,41 @@
+/* Typing animation styles */
+.typing-name {
+  position: relative;
+}
+
+.typing-cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  font-weight: normal;
+  margin-left: 2px;
+}
+
+.typing-complete .typing-cursor {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Optional: Add a subtle glow effect when typing is complete */
+.typing-complete {
+  animation: subtle-glow 2s ease-in-out;
+}
+
+@keyframes subtle-glow {
+  0% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+  }
+  100% {
+    text-shadow: none;
+  }
+}
